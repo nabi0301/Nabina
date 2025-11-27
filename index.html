@@ -149,6 +149,54 @@
       font-size:var(--font-md);
       border-radius:var(--space-xs);
       box-shadow: 0 6px 18px rgba(124,92,255,0.18), 0 2px 6px rgba(0,229,255,0.06);
+      transition:all 0.3s ease;
+    }
+    .btn-neon:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,92,255,0.3)}
+    
+    /* Visual flow improvements */
+    section{
+      opacity:0;
+      transform:translateY(30px);
+      animation:fadeInUp 0.8s ease forwards;
+    }
+    section:nth-child(2){animation-delay:0.1s}
+    section:nth-child(3){animation-delay:0.2s}
+    section:nth-child(4){animation-delay:0.3s}
+    section:nth-child(5){animation-delay:0.4s}
+    
+    @keyframes fadeInUp{
+      to{opacity:1;transform:translateY(0)}
+    }
+    
+    /* Smooth scroll indicators */
+    html{scroll-behavior:smooth;scroll-padding-top:80px}
+    
+    /* Focus flow with subtle visual cues */
+    .card{transition:transform 0.3s ease, box-shadow 0.3s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(2,6,23,0.8)}
+    
+    /* Reading rhythm - emphasize key information */
+    strong{font-weight:700;color:var(--accent-2)}
+    a{transition:color 0.2s ease}
+    a:hover{color:var(--accent) !important}
+    
+    /* Progressive disclosure - guide eye down the page */
+    .hero{position:relative}
+    .hero::after{
+      content:'↓';
+      position:absolute;
+      bottom:var(--space-lg);
+      left:50%;
+      transform:translateX(-50%);
+      font-size:var(--font-xl);
+      color:var(--accent);
+      opacity:0.5;
+      animation:bounce 2s infinite;
+    }
+    
+    @keyframes bounce{
+      0%, 100%{transform:translateX(-50%) translateY(0)}
+      50%{transform:translateX(-50%) translateY(-10px)}
     }
 
     .tag{
@@ -217,7 +265,32 @@
     
     /* Max-width for optimal readability (50-75 characters per line) */
     p{max-width:75ch}
-    .lead{max-width:65ch}
+    .lead{max-width:65ch;font-weight:400;opacity:0.95}
+    
+    /* Visual hierarchy for scanning */
+    h1, h2, h3, h4, h5, h6{
+      font-weight:700;
+      letter-spacing:0.02em;
+      margin-top:calc(var(--space-lg) * 1.5);
+      margin-bottom:var(--space-md);
+    }
+    h1:first-child, h2:first-child{margin-top:0}
+    
+    /* Create visual pathways */
+    .section-title{
+      position:relative;
+      padding-left:var(--space-md);
+    }
+    .section-title::before{
+      content:'';
+      position:absolute;
+      left:0;
+      top:0;
+      height:100%;
+      width:4px;
+      background:linear-gradient(180deg,var(--accent),var(--accent-2));
+      border-radius:2px;
+    }
 
     /* responsive tweaks */
     @media (max-width:767px){ 
