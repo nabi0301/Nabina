@@ -97,7 +97,12 @@
     }
     h2.section-title::after{content:''; position:absolute; left:0; bottom:-10px; height:3px; width:60px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:6px}
 
-    .project-card .card-body{min-height:180px}
+    .project-card .card{height:100%}
+    .project-card .card-body{min-height:280px; display:flex; flex-direction:column;}
+    .project-card .card-body .btn-neon{margin-top:auto;}
+    
+    #skills .card{min-height:120px}
+    
     .btn-neon{
       background: linear-gradient(90deg, var(--accent), var(--accent-2)); border:none; color:#021026; font-weight:600;
       box-shadow: 0 6px 18px rgba(124,92,255,0.18), 0 2px 6px rgba(0,229,255,0.06);
