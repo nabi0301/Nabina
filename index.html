@@ -182,14 +182,49 @@
       .profile-photo{width:140px;height:140px;margin:0 auto var(--space-lg);}
     }
     
-    footer{padding:var(--space-xl) 0}
-    ul{padding-left:var(--space-lg)}
+    footer{padding:var(--space-xl) 0;text-align:center;color:rgba(255,255,255,0.65);border-top:1px solid rgba(255,255,255,0.03);background:transparent}
+    ul{padding-left:var(--space-lg);margin-bottom:var(--space-lg)}
     li{margin-bottom:var(--space-sm)}
-
-    footer{padding:30px 0;text-align:center;color:rgba(255,255,255,0.65);border-top:1px solid rgba(255,255,255,0.03);background:transparent}
+    
+    /* Alignment & Spacing Rules */
+    .container{max-width:1200px;margin:0 auto;padding:0 var(--space-lg)}
+    .row{margin-left:calc(var(--space-md) * -1);margin-right:calc(var(--space-md) * -1)}
+    .row > *{padding-left:var(--space-md);padding-right:var(--space-md)}
+    
+    /* Consistent vertical rhythm */
+    .mt-2{margin-top:var(--space-sm) !important}
+    .mt-3{margin-top:var(--space-md) !important}
+    .mt-4{margin-top:var(--space-lg) !important}
+    .mb-3{margin-bottom:var(--space-md) !important}
+    .mb-4{margin-bottom:var(--space-lg) !important}
+    
+    /* Card spacing consistency */
+    .card{margin-bottom:var(--space-lg)}
+    .card-body{padding:var(--space-lg) !important}
+    .card-title{margin-bottom:var(--space-md) !important}
+    .card-text{margin-bottom:var(--space-lg) !important}
+    
+    /* Section title spacing */
+    .section-title{margin-bottom:var(--space-xl) !important}
+    
+    /* Button spacing */
+    .btn{margin-right:var(--space-sm);margin-bottom:var(--space-sm)}
+    
+    /* Text alignment for readability */
+    .text-center{text-align:center}
+    .text-start, .text-lg-start{text-align:left}
+    .text-end, .text-lg-end{text-align:right}
+    
+    /* Max-width for optimal readability (50-75 characters per line) */
+    p{max-width:75ch}
+    .lead{max-width:65ch}
 
     /* responsive tweaks */
-    @media (max-width:767px){ .hero{padding:100px 0 40px} .navbar-brand{font-size:1rem} }
+    @media (max-width:767px){ 
+      .hero{padding:calc(var(--space-xxl) * 1.5) 0 var(--space-xxl)} 
+      .navbar-brand{font-size:var(--font-md)}
+      .container{padding:0 var(--space-md)}
+    }
 
     /* Force white text for Skills and Experience sections for higher contrast */
     #skills, #skills h2, #skills .card, #skills .card h5, #skills p, #skills ul, #skills li,
