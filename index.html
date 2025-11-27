@@ -244,21 +244,18 @@
 
     /* profile photo style */
     .profile-photo{
-      width:180px; 
-      height:180px; 
+      width:280px; 
+      height:280px; 
       border-radius:50%; 
       object-fit:cover; 
       display:block;
-      border:5px solid transparent; 
-      box-shadow: 0 15px 40px rgba(2,6,23,0.7);
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 20px 60px rgba(2,6,23,0.8), 0 0 0 1px rgba(46,204,113,0.1);
       position:relative;
     }
-    .profile-photo{border-image: linear-gradient(135deg,var(--accent),var(--accent-2)) 1}
 
     /* small screen adjustments */
     @media (max-width:767px){
-      .profile-photo{width:140px;height:140px;}
+      .profile-photo{width:180px;height:180px;}
       .hero h1{font-size:var(--font-xl) !important}
       .hero .lead{font-size:var(--font-md) !important}
     }
@@ -424,21 +421,21 @@
           <p class="lead text-center" style="color:rgba(230,238,248,0.9);font-size:var(--font-md);line-height:1.8">I am a Computer Science undergraduate student with a master's in business studies, skilled in Python, SQL, and data visualization. Currently interning at PNNL on power systems data analysis and AI integration. Enthusiastic about integrating technical and business insights to drive data-driven decisions.</p>
         </div>
       </div>
-      <div class="row mt-4">
-        <div class="col-md-4">
-          <div class="card glass p-3 mb-3">
+      <div class="row mt-4" style="gap:var(--space-xl) 0">
+        <div class="col-md-4 mb-4">
+          <div class="card glass p-3">
             <h5>Programming</h5>
             <p class="mb-0">Python, HTML, CSS, Java, R, MySQL, SQLite</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card glass p-3 mb-3">
+        <div class="col-md-4 mb-4">
+          <div class="card glass p-3">
             <h5>Data & Visualization</h5>
             <p class="mb-0">Pandas, NumPy, Matplotlib, Plotly, Dash, NetworkX, Excel, SPSS</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card glass p-3 mb-3">
+        <div class="col-md-4 mb-4">
+          <div class="card glass p-3">
             <h5>Tools & Other</h5>
             <p class="mb-0">Office 365, Google Forms, Google Sites, Web Programming, Business Analysis</p>
           </div>
