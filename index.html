@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nabina Niraula Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: #0f1724; /* deep navy */
+      --bg2: #081126; /* darker */
+      --accent: #2ecc71; /* neon green */
+      --accent-2: #a8ffdb; /* light mint */
+      --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.04);
+      --muted: rgba(255,255,255,0.78);
+    }
+
+    html,body{height:100%;}
+    body {
+      margin:0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color: #ffffff;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(46,204,113,0.12), transparent),
+      radial-gradient(900px 400px at 90% 80%, rgba(168,255,219,0.06), transparent),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+      -webkit-font-smoothing:antialiased;
+      scroll-behavior: smooth;
+      overflow-x:hidden;
+    }
+
+    /* animated grid lines for futuristic feel */
+    .bg-grid{
+      position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.12;
+      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px, 40px 40px;
+      transform: translateZ(0);
+      animation: drift 12s linear infinite;
+    }
+    @keyframes drift{from{transform:translateY(0)}to{transform:translateY(-30px)}}
+
+    /* Floating orbs animation */
+    .floating-orbs{
+      position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;
+    }
+    .orb{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(80px);
+      opacity:0.15;
+      animation: float 20s infinite ease-in-out;
+    }
+    .orb:nth-child(1){
+      width:300px; height:300px;
+      background:radial-gradient(circle, var(--accent), transparent);
+      top:10%; left:5%;
+      animation-duration:25s;
+    }
+    .orb:nth-child(2){
+      width:250px; height:250px;
+      background:radial-gradient(circle, var(--accent-2), transparent);
+      top:60%; right:10%;
+      animation-duration:30s; animation-delay:-10s;
+    }
+    .orb:nth-child(3){
+      width:200px; height:200px;
+      background:radial-gradient(circle, rgba(46,204,113,0.5), transparent);
+      bottom:20%; left:40%;
+      animation-duration:35s; animation-delay:-20s;
+    }
+    @keyframes float{
+      0%, 100%{transform:translate(0,0) scale(1);}
+      25%{transform:translate(30px,-30px) scale(1.1);}
+      50%{transform:translate(-20px,20px) scale(0.9);}
+      75%{transform:translate(40px,10px) scale(1.05);}
+    }
+
+    nav.navbar{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));backdrop-filter: blur(6px);z-index:5}
+    .navbar-brand{font-weight:700;color:var(--accent);letter-spacing:0.4px}
+    .nav-link{color:var(--muted) !important;margin-left:8px}
+    .nav-link:hover{color:var(--accent-2) !important}
+
+    section{padding:80px 0;position:relative;z-index:2}
+    .hero{padding:140px 0 80px}
+    .hero .lead{color:rgba(230,238,248,0.85);font-size:1.05rem}
+
+    .card.glass{
+      background: linear-gradient(180deg, var(--glass), var(--glass-2));
+      border:1px solid rgba(255,255,255,0.06); box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+    }
+
+    h2.section-title{
+      font-family: 'Poppins', sans-serif; letter-spacing:0.6px; font-weight:700; color:var(--accent);
+      display:inline-block; position:relative; margin-bottom:1rem; font-size:1.6rem
+    }
+    h2.section-title::after{content:''; position:absolute; left:0; bottom:-10px; height:3px; width:60px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:6px}
+
+    .project-card .card-body{min-height:180px}
+    .btn-neon{
+      background: linear-gradient(90deg, var(--accent), var(--accent-2)); border:none; color:#021026; font-weight:600;
+      box-shadow: 0 6px 18px rgba(124,92,255,0.18), 0 2px 6px rgba(0,229,255,0.06);
+    }
+
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted);font-size:0.85rem;margin-right:6px}
+
+    /* profile photo style */
+    .profile-photo{
+      width:200px; height:200px; border-radius:50%; object-fit:cover; display:block;
+      border:4px solid transparent; box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      position:relative;
+    }
+    .profile-photo{border-image: linear-gradient(90deg,var(--accent),var(--accent-2)) 1}
+
+    /* small screen: show small circular photo above hero text */
+    @media (max-width:767px){
+      .col-lg-7 .me-4{display:none !important}
+      .profile-photo{width:140px;height:140px;margin:0 auto 18px;}
+    }
+
+    footer{padding:30px 0;text-align:center;color:rgba(255,255,255,0.65);border-top:1px solid rgba(255,255,255,0.03);background:transparent}
+
+    /* responsive tweaks */
+    @media (max-width:767px){ .hero{padding:100px 0 40px} .navbar-brand{font-size:1rem} }
+
+    /* Force white text for Skills and Experience sections for higher contrast */
+    #skills, #skills h2, #skills .card, #skills .card h5, #skills p, #skills ul, #skills li,
+    #experience, #experience h2, #experience ul, #experience li {
+      color: #ffffff !important;
+    }
+    /* Ensure card bodies inside those sections also use white text */
+    #skills .card .card-body, #experience .card .card-body { color: #ffffff !important; }
+
+    /* Make most project text white to match requested theme */
+    h1,h2,h3,h4,h5,h6,p,ul,li,span,a,div,button,label,input,small,strong {
+      color: #ffffff !important;
+    }
+    /* Force all text inside body to white as a final override (excludes images/SVG fills) */
+    body, body * {
+      color: #ffffff !important;
+    }
+    /* Keep neon button text dark for contrast against the light neon background */
+    .btn-neon {
+      color: #021026 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-grid" aria-hidden="true"></div>
+  
+  <!-- Floating orbs animation -->
+  <div class="floating-orbs" aria-hidden="true">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Nabina Niraula</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero / About Section -->
+  <section id="about" class="hero text-center">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7 text-lg-start d-flex align-items-center">
+          <div class="me-4 d-none d-md-block">
+            <!-- Profile photo: using local absolute path so it displays when opening the file locally -->
+            <img src="Nabina photo.jpg" alt="Nabina Photo" class="profile-photo" id="profilePhoto">
+          </div>
+          <div>
+            <h1 class="display-4" style="font-weight:800;"><span style="color:var(--accent);">Nabina Niraula</span></h1>
+            <p class="lead">Computer Science Undergraduate • Data Science & AI Enthusiast • Analytics • GEM Fellowship Applicant (Fall 2026)</p>
+            <p style="max-width:680px;color:rgba(230,238,248,0.85)">I am a Computer Science undergraduate student with a master's in business studies, skilled in Python, SQL, and data visualization. Currently interning at PNNL on power systems data analysis and AI integration. Enthusiastic about integrating technical and business insights to drive data-driven decisions.</p>
+            <div class="mt-4">
+              <a href="#projects" class="btn btn-neon me-2">See Projects</a>
+              <a href="#contact" class="btn btn-outline-light">Contact Me</a>
+            </div>
+            <div class="mt-4">
+              <span class="tag">Python</span>
+              <span class="tag">Data Viz</span>
+              <span class="tag">AI & LLMs</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 d-none d-lg-block">
+          <!-- Futuristic AI card -->
+          <div class="card glass p-4">
+            <svg width="100%" height="160" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <defs>
+                  <linearGradient id="g1" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#2ecc71" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#a8ffdb" stop-opacity="0.85"/>
+                  </linearGradient>
+              </defs>
+              <rect width="600" height="160" rx="12" fill="url(#g1)" opacity="0.06" />
+              
+              <!-- Animated bar chart -->
+              <g class="bars">
+                <rect x="50" y="100" width="30" height="40" fill="url(#g1)" opacity="0.7">
+                  <animate attributeName="height" values="40;60;45;40" dur="3s" repeatCount="indefinite"/>
+                  <animate attributeName="y" values="100;80;95;100" dur="3s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="90" y="80" width="30" height="60" fill="url(#g1)" opacity="0.8">
+                  <animate attributeName="height" values="60;50;70;60" dur="3.5s" repeatCount="indefinite"/>
+                  <animate attributeName="y" values="80;90;70;80" dur="3.5s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="130" y="70" width="30" height="70" fill="url(#g1)" opacity="0.75">
+                  <animate attributeName="height" values="70;80;65;70" dur="4s" repeatCount="indefinite"/>
+                  <animate attributeName="y" values="70;60;75;70" dur="4s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="170" y="90" width="30" height="50" fill="url(#g1)" opacity="0.7">
+                  <animate attributeName="height" values="50;70;55;50" dur="3.2s" repeatCount="indefinite"/>
+                  <animate attributeName="y" values="90;70;85;90" dur="3.2s" repeatCount="indefinite"/>
+                </rect>
+              </g>
+              
+              <!-- Animated line chart -->
+              <polyline points="250,120 290,90 330,100 370,60 410,75 450,50" 
+                        fill="none" stroke="url(#g1)" stroke-width="3" opacity="0.8">
+                <animate attributeName="points" 
+                         values="250,120 290,90 330,100 370,60 410,75 450,50;
+                                 250,110 290,80 330,110 370,50 410,65 450,40;
+                                 250,120 290,90 330,100 370,60 410,75 450,50" 
+                         dur="4s" repeatCount="indefinite"/>
+              </polyline>
+              
+              <!-- Data points on line -->
+              <circle cx="250" cy="120" r="4" fill="#2ecc71">
+                <animate attributeName="cy" values="120;110;120" dur="4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="330" cy="100" r="4" fill="#2ecc71">
+                <animate attributeName="cy" values="100;110;100" dur="4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="410" cy="75" r="4" fill="#2ecc71">
+                <animate attributeName="cy" values="75;65;75" dur="4s" repeatCount="indefinite"/>
+              </circle>
+              
+              <!-- Pulsing data nodes -->
+              <circle cx="500" cy="80" r="8" fill="none" stroke="url(#g1)" stroke-width="2" opacity="0.6">
+                <animate attributeName="r" values="8;14;8" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="540" cy="100" r="8" fill="none" stroke="url(#g1)" stroke-width="2" opacity="0.6">
+                <animate attributeName="r" values="8;14;8" dur="2.5s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.5s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+            <div class="p-3">
+              <h5 style="color:var(--accent);font-weight:700">AI & Visualization</h5>
+              <p style="color:var(--muted);margin-bottom:0">Interactive dashboards + predictive insights. I combine domain data with ML prototypes and easy-to-use visual tools.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <div class="row mt-4">
+        <div class="col-md-4">
+          <div class="card glass p-3 mb-3">
+            <h5>Programming</h5>
+            <p class="mb-0">Python, HTML, CSS, Java, R, MySQL, SQLite</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card glass p-3 mb-3">
+            <h5>Data & Visualization</h5>
+            <p class="mb-0">Pandas, NumPy, Matplotlib, Plotly, Dash, NetworkX, Excel, SPSS</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card glass p-3 mb-3">
+            <h5>Tools & Other</h5>
+            <p class="mb-0">Office 365, Google Forms, Google Sites, Web Programming, Business Analysis</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="row mt-4">
+
+        <div class="col-md-6 project-card">
+          <div class="card glass">
+            <div class="card-body">
+              <h5 class="card-title">Enhancing Grid Reliability with Dynamic Line Rating and Visualization <span class="badge bg-transparent" style="border:1px solid rgba(255,255,255,0.04);color:var(--muted)">PNNL</span></h5>
+              <p class="card-text" style="color:#ffffff !important;">Developed user-interactive web-based visualization tool for power system scenarios using Python libraries (Plotly, Dash, matplotlib, NetworkX). Built comprehensive database using Python and SQLite. Analyzed large datasets and integrated AI for natural language interaction.</p>
+              <a href="https://github.com/nabi0301/power-system-ai--assistant" target="_blank" rel="noopener" class="btn btn-neon">View Project</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 project-card">
+          <div class="card glass">
+            <div class="card-body">
+              <h5 class="card-title">Monthly Worklog Automation <span class="badge bg-transparent" style="border:1px solid rgba(255,255,255,0.04);color:var(--muted)">Python</span></h5>
+              <p class="card-text" style="color:#ffffff !important;">Automated cleaning, visualization, and storage of Excel timesheet data using Python and Pandas. Visual reports were generated and updates pushed to GitLab.</p>
+              <a href="https://www.linkedin.com/feed/update/urn:li:activity:7321662549815382017/" target="_blank" rel="noopener" class="btn btn-neon">View Project</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <ul class="mt-3">
+        <li class="mb-3"><strong>Research Intern – DOE SULI Program, PNNL, Richland, WA (August 2025 – Present)</strong>: Gaining hands-on experience with Large Language Models, prompt engineering, generating statistical analysis from databases, and integrating AI into visualization tools for natural language interaction. Preparing research reports and technical PowerPoint presentations for symposium.</li>
+        <li class="mb-3"><strong>Research Intern – DOE SULI Program, PNNL, Richland, WA (June 2025 – August 2025)</strong>: Assisted research project on Dynamic Line Rating technology in power grids. Developed user-interactive web-based visualization tool using Python libraries (Plotly, Dash, matplotlib, NetworkX). Built comprehensive database using Python and SQLite. Analyzed large datasets using NumPy and Pandas. Delivered final research report and poster presentation at Gold Experience Symposium.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education">
+    <div class="container">
+      <h2 class="section-title">Education</h2>
+      <ul class="mt-3">
+        <li class="mb-3"><strong>BSc in Computer Science – University of the People, Pasadena, CA (June 2022 – Present)</strong>: Honors List. Courses: Data Mining, Machine Learning, Data Structures, Big Data, AI, Information Retrieval, Networking, Security</li>
+        <li class="mb-3"><strong>Master's in Business Studies – Tribhuvan University, Lalitpur, Nepal (2017 – 2024)</strong>: Focus on Human Resource Management, Organizational Development and Change, Strategic Management. Dissertation: Job Satisfaction in Public vs. Private Sector Banks in Nepal (Tools: Excel, SPSS, Google Forms)</li>
+      </ul>
+      <h4 class="mt-4" style="color:var(--accent);">Certifications</h4>
+      <ul class="mt-2">
+        <li>DOE WDTS SULI Internship – PNNL, July 2025</li>
+        <li>Business Analysis Fundamentals – Coursera, January 2025</li>
+        <li>Business Analysis and Process Management – Coursera, July 2024</li>
+      </ul>
+      <h4 class="mt-4" style="color:var(--accent);">Awards</h4>
+      <ul class="mt-2">
+        <li>Dean's Merit Award – University of Albany, Master's Degree in Computer Science</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container text-center">
+      <h2 class="section-title">Contact</h2>
+  <p class="mt-3">Location: Richland, WA</p>
+  <p>Email: <a href="mailto:nabinaniraula@my.uopeople.edu">nabinaniraula@my.uopeople.edu</a></p>
+  <p>Phone: <a href="tel:+15092122120">(509) 212-2120</a></p>
+  <p>LinkedIn: <a href="https://www.linkedin.com/in/nabina-niraula/" target="_blank" rel="noopener">LinkedIn Profile</a> • GitHub: <a href="https://github.com/nabi0301" target="_blank" rel="noopener">GitHub Profile</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-md-start">&copy; 2025 Nabina Niraula</div>
+        <div class="col-md-6 text-md-end">
+          <a href="https://www.linkedin.com/in/nabina-niraula/" target="_blank" rel="noopener" class="text-decoration-none" style="color:var(--muted);margin-right:12px">LinkedIn</a>
+          <a href="https://github.com/nabi0301" target="_blank" rel="noopener" class="text-decoration-none" style="color:var(--muted)">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
